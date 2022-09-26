@@ -237,7 +237,7 @@ TextureImporter:
       213: -6414855782510244281
     second: Farmhouse1_77
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -257,6 +257,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -266,8 +268,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -288,9 +290,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -1979,6 +1985,85 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Farmhouse1_13: 5699376937107550062
+      Farmhouse1_31: -3783833373681859583
+      Farmhouse1_73: -4068373843034722657
+      Farmhouse1_17: -977085498106598723
+      Farmhouse1_66: -5434584905858920990
+      Farmhouse1_67: -415912100562211290
+      Farmhouse1_44: -7253584674300364634
+      Farmhouse1_23: -7931138795965189215
+      Farmhouse1_24: 8727980769644376175
+      Farmhouse1_25: 9127463800445622325
+      Farmhouse1_19: 4075447271956507769
+      Farmhouse1_32: -8583072002217684116
+      Farmhouse1_42: -4760812116369379776
+      Farmhouse1_50: -7249137921277502441
+      Farmhouse1_10: 8154248066985575681
+      Farmhouse1_8: -8969843628315766570
+      Farmhouse1_34: -8315018468700852731
+      Farmhouse1_53: 3260482827011528953
+      Farmhouse1_1: 8624530540903311869
+      Farmhouse1_40: 6290304044864659010
+      Farmhouse1_51: -3720167506537399409
+      Farmhouse1_57: 2073221590715218930
+      Farmhouse1_64: 7465395923516520857
+      Farmhouse1_70: -118444223845287146
+      Farmhouse1_9: 3665154138378134983
+      Farmhouse1_68: 1611795016038931475
+      Farmhouse1_47: -4059019466259195321
+      Farmhouse1_39: 2023990405101985043
+      Farmhouse1_12: -5723558828464999594
+      Farmhouse1_11: -2352000635375516912
+      Farmhouse1_62: -293329029370893564
+      Farmhouse1_76: -7132210844122627688
+      Farmhouse1_21: 7832868148736365580
+      Farmhouse1_20: 4049343582058147229
+      Farmhouse1_41: 2353569479101236596
+      Farmhouse1_56: -2851425535276871292
+      Farmhouse1_15: -7664933586089083815
+      Farmhouse1_48: 6622358049857577535
+      Farmhouse1_65: -5463863362138907024
+      Farmhouse1_69: 8421731285750574200
+      Farmhouse1_52: 7216187874165955149
+      Farmhouse1_26: -305744057882886559
+      Farmhouse1_5: -8017300029186847244
+      Farmhouse1_14: -2989411285378842608
+      Farmhouse1_43: -7843421016134920395
+      Farmhouse1_35: -1764772776998248103
+      Farmhouse1_59: -4572857074225040708
+      Farmhouse1_58: -3750960586044750967
+      Farmhouse1_63: -6366710677090536586
+      Farmhouse1_3: 6708361716510967171
+      Farmhouse1_29: -6505224617158739912
+      Farmhouse1_61: -6619973085992129391
+      Farmhouse1_49: 5388932638159996428
+      Farmhouse1_22: 7109555171503141768
+      Farmhouse1_0: -5447017438696836623
+      Farmhouse1_37: -1748652956333102363
+      Farmhouse1_36: 5572751903201282181
+      Farmhouse1_75: -6347636749006352623
+      Farmhouse1_38: 6492316313434758729
+      Farmhouse1_74: 3430545489028532383
+      Farmhouse1_60: -3006170140622992744
+      Farmhouse1_7: -4264921722673749588
+      Farmhouse1_4: 7934889958971613518
+      Farmhouse1_45: 7487612048858888252
+      Farmhouse1_27: 4751175030717659274
+      Farmhouse1_28: 8593645072811640953
+      Farmhouse1_6: -3539963878546077452
+      Farmhouse1_18: 4056451762445074269
+      Farmhouse1_71: 4616610181116344921
+      Farmhouse1_30: 3036195813375996149
+      Farmhouse1_16: 667442048212781460
+      Farmhouse1_46: -4351121832057183362
+      Farmhouse1_54: 3507966435909736506
+      Farmhouse1_55: 1588571692619773349
+      Farmhouse1_72: -1733987980305328736
+      Farmhouse1_77: -6414855782510244281
+      Farmhouse1_2: -6162933575431242530
+      Farmhouse1_33: -3838475676277424314
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

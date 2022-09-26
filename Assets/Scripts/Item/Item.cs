@@ -8,7 +8,11 @@ public class Item : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-    public int ItemCode { get { return _itemCode; } set { _itemCode = value; } }
+    public int ItemCode
+    {
+        get => _itemCode;
+        set => _itemCode = value;
+    }
 
     private void Awake()
     {

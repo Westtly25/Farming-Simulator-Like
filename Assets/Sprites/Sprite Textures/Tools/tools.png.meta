@@ -822,7 +822,7 @@ TextureImporter:
       213: 21300544
     second: tools_272
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -842,6 +842,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -851,8 +853,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -873,9 +875,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -1472,6 +1478,33 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      tools_3: 21300006
+      tools_22: 21300044
+      tools_23: 21300046
+      tools_0: 21300000
+      tools_44: 21300088
+      tools_47: 21300094
+      tools_2: 21300004
+      tools_25: 21300050
+      tools_66: 21300132
+      tools_46: 21300092
+      tools_24: 21300048
+      tools_43: 21300086
+      tools_67: 21300134
+      tools_42: 21300084
+      tools_1: 21300002
+      tools_21: 21300042
+      tools_63: 21300126
+      tools_5: 21300010
+      tools_252: 21300504
+      tools_64: 21300128
+      tools_253: 21300506
+      tools_68: 21300136
+      tools_26: 21300052
+      tools_65: 21300130
+      tools_4: 21300008
+      tools_45: 21300090
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

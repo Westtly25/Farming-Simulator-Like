@@ -174,7 +174,7 @@ TextureImporter:
       213: -3561422525174597011
     second: Butch_65
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -194,6 +194,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -203,8 +205,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -225,9 +227,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -887,6 +893,36 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Butch_19: -7429651265933631045
+      Butch_30: -6149864595877949754
+      Butch_8: 8294058264946379549
+      Butch_24: -6916568032624341007
+      Butch_1: 2410417562735743259
+      Butch_12: 5292183326719892101
+      Butch_20: 498290446565263276
+      Butch_22: 1272333300326336836
+      Butch_6: 2017281782991332916
+      Butch_0: -6177883350512257784
+      Butch_9: -5225052469503663433
+      Butch_14: 1814301352343478109
+      Butch_11: -4931455723381422677
+      Butch_10: -7581732467117956738
+      Butch_34: -1957009873371972529
+      Butch_18: -8886988063636193416
+      Butch_23: 8376974747693966830
+      Butch_32: 104825250570258881
+      Butch_15: -5900568562052052237
+      Butch_16: -7746961489531447020
+      Butch_25: -5937698907163215598
+      Butch_3: 3669725201044954552
+      Butch_2: -9160357814945632070
+      Butch_5: -7499818730196220746
+      Butch_7: -627461260009279665
+      Butch_17: 8275156808502821822
+      Butch_21: 2864802094771022172
+      Butch_13: 8177807654057341030
+      Butch_4: 6748489015826604068
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

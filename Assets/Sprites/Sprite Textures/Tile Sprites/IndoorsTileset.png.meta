@@ -96,7 +96,7 @@ TextureImporter:
       213: -6351870387016058614
     second: IndoorsTileset_30
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -116,6 +116,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -125,8 +127,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -147,9 +149,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -851,6 +857,38 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      IndoorsTileset_3: -3497917292823728146
+      IndoorsTileset_17: 5422813840854434316
+      IndoorsTileset_20: 8125883295824454655
+      IndoorsTileset_18: 4304753921002075044
+      IndoorsTileset_5: -806434193755629020
+      IndoorsTileset_12: -1925233789244390569
+      IndoorsTileset_23: -8937822744323045597
+      IndoorsTileset_13: -232639132375209303
+      IndoorsTileset_26: 5703416230722529639
+      IndoorsTileset_14: -66721832405222472
+      IndoorsTileset_27: 6771515308308801781
+      IndoorsTileset_4: -7347939064613912645
+      IndoorsTileset_25: -750008825050981952
+      IndoorsTileset_29: 4654973851195219761
+      IndoorsTileset_30: -6351870387016058614
+      IndoorsTileset_15: 6887888638497536022
+      IndoorsTileset_21: 6500429132793329597
+      IndoorsTileset_24: 4775840894457322899
+      IndoorsTileset_28: -652240208703323525
+      IndoorsTileset_16: -6874751711128125
+      IndoorsTileset_9: -8675395417940287978
+      IndoorsTileset_0: -8332060012023120364
+      IndoorsTileset_6: 7549046521571793231
+      IndoorsTileset_2: 4994249687646329925
+      IndoorsTileset_10: 4734770970711719637
+      IndoorsTileset_1: -2267843477386243377
+      IndoorsTileset_8: 7498893672294757778
+      IndoorsTileset_19: 5738628931103004273
+      IndoorsTileset_11: 7686187414422493374
+      IndoorsTileset_7: -6268994579574035415
+      IndoorsTileset_22: 587816357784181200
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

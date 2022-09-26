@@ -579,7 +579,7 @@ TextureImporter:
       213: 1668832194925152583
     second: farmerHats_191
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -599,6 +599,8 @@ TextureImporter:
   isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -608,8 +610,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -630,9 +632,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -4715,6 +4721,199 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      farmerHats_96: -8348338703338302385
+      farmerHats_159: 6818172849137078350
+      farmerHats_122: 1228100350856137123
+      farmerHats_177: -7831357320390553439
+      farmerHats_146: -5966790158471737235
+      farmerHats_189: -3416603519731791873
+      farmerHats_104: 7538840939285776272
+      farmerHats_176: -7002733912274048128
+      farmerHats_82: 1606031346083743741
+      farmerHats_173: -7263854169867170956
+      farmerHats_184: -1661297098617272594
+      farmerHats_23: 5189105615003692138
+      farmerHats_167: -5244229127662784415
+      farmerHats_13: -1382199444888660902
+      farmerHats_4: -2014683331565002095
+      farmerHats_166: 7066926335578475918
+      farmerHats_107: 8271318497098028165
+      farmerHats_2: -443007046319162247
+      farmerHats_68: 6973538699229497732
+      farmerHats_102: -4949643017103131932
+      farmerHats_162: -1652693973487872202
+      farmerHats_75: 1005692486736373781
+      farmerHats_35: -5827714115542082549
+      farmerHats_66: 2335226695095999584
+      farmerHats_53: -4839167053019595567
+      farmerHats_148: -8623868517069974643
+      farmerHats_187: -3287788560760635733
+      farmerHats_169: 590066629134160370
+      farmerHats_191: 1668832194925152583
+      farmerHats_14: -2511752048866237017
+      farmerHats_50: 922020653123135145
+      farmerHats_94: -9210774231947502247
+      farmerHats_157: -8024700657089146266
+      farmerHats_41: -8480800214713894665
+      farmerHats_40: -8284721365898438883
+      farmerHats_170: -8234845303843198611
+      farmerHats_101: 3378639164705601433
+      farmerHats_140: 2938997525349760717
+      farmerHats_87: -733089038253534689
+      farmerHats_137: 7624251656233269634
+      farmerHats_168: -4760837507337226054
+      farmerHats_134: -7753323291520749034
+      farmerHats_79: 4627655087431391401
+      farmerHats_63: 5299992541050957493
+      farmerHats_113: 1777850131077396949
+      farmerHats_90: 3374034443011239669
+      farmerHats_125: 5191462684604969759
+      farmerHats_9: -6547187993198285140
+      farmerHats_111: -7331719980433614062
+      farmerHats_45: -3685371211122448722
+      farmerHats_172: -7625996559163282589
+      farmerHats_18: -3246547823983109144
+      farmerHats_49: -1592851014456805645
+      farmerHats_52: -8430728064611605102
+      farmerHats_188: -6410044367119964760
+      farmerHats_5: 3342489220051677060
+      farmerHats_30: -5049406596122144555
+      farmerHats_20: -2993173377836215647
+      farmerHats_74: 478115942265912794
+      farmerHats_108: -3144303163976154922
+      farmerHats_34: 3971770260773837648
+      farmerHats_183: -5317385998782016005
+      farmerHats_133: 4142205980581854772
+      farmerHats_48: -5259155026478514227
+      farmerHats_118: 8678786456349771123
+      farmerHats_6: 3839019679042535459
+      farmerHats_174: 2553405404835090299
+      farmerHats_28: -4795875539601200689
+      farmerHats_175: 3154674563070593348
+      farmerHats_77: -8594553647119346655
+      farmerHats_29: -2397275107319069767
+      farmerHats_112: -2180013004975418231
+      farmerHats_145: 147280606687202270
+      farmerHats_72: 103479224292661831
+      farmerHats_8: 1128763229005151856
+      farmerHats_83: -2212112640334630434
+      farmerHats_93: -1717890910735259413
+      farmerHats_70: 7618840581025438194
+      farmerHats_127: -4126537675924093176
+      farmerHats_47: -2601547545200053979
+      farmerHats_135: -5772875920364394455
+      farmerHats_97: -5730617711771317419
+      farmerHats_44: 1632859275430729725
+      farmerHats_178: -6637169211776081284
+      farmerHats_69: 5811219177761095084
+      farmerHats_16: 9120610963174188580
+      farmerHats_129: 5959631071196338996
+      farmerHats_185: 1023270124800846073
+      farmerHats_3: -2116304037104355946
+      farmerHats_38: 1654975996570072442
+      farmerHats_57: 4756025183542029708
+      farmerHats_130: -3363258046849279659
+      farmerHats_61: 3801414291410628390
+      farmerHats_158: 288251596325051156
+      farmerHats_114: -4069140711841922505
+      farmerHats_161: -6164465044154533013
+      farmerHats_143: -5998036209581286041
+      farmerHats_17: 2569243041286199574
+      farmerHats_19: 6036820251353444360
+      farmerHats_136: -1107632170100065704
+      farmerHats_180: -5783577457138527979
+      farmerHats_0: 1022458966149931118
+      farmerHats_36: 1854606325120068756
+      farmerHats_51: -2583434746840918937
+      farmerHats_98: -856041085898530780
+      farmerHats_95: -2385266820742672696
+      farmerHats_27: -2162430438570259588
+      farmerHats_71: 3538048374334919864
+      farmerHats_22: -2252393083540631500
+      farmerHats_141: -2228927240195029033
+      farmerHats_152: -4938215298406888242
+      farmerHats_58: 7836824310679280268
+      farmerHats_150: -4586003302502865154
+      farmerHats_12: 2458555694142107203
+      farmerHats_80: 4259437770332629387
+      farmerHats_116: 1054944275311019647
+      farmerHats_119: -4814769861030090427
+      farmerHats_132: 2686089548548749381
+      farmerHats_147: 6055429160023917587
+      farmerHats_26: 8647037138472264912
+      farmerHats_121: -5684538960493446966
+      farmerHats_190: -6813668612698882930
+      farmerHats_92: -4948895432081576141
+      farmerHats_32: 4614856842775745368
+      farmerHats_171: 958884514192449452
+      farmerHats_11: -1601441455181650677
+      farmerHats_56: -363148745730564386
+      farmerHats_142: -6548711987329753270
+      farmerHats_86: -2155160029733385656
+      farmerHats_153: 186344978588432469
+      farmerHats_89: -823662569385393540
+      farmerHats_139: 6104654329334454520
+      farmerHats_99: 547340549241336974
+      farmerHats_131: 6648837056119425400
+      farmerHats_154: 6589549328316986984
+      farmerHats_67: 1615004083444416343
+      farmerHats_91: -7247147711424031155
+      farmerHats_165: 4223182526750813878
+      farmerHats_100: 4206569606522562579
+      farmerHats_39: -8642651978972463437
+      farmerHats_1: -5589240093002248636
+      farmerHats_46: -2180008989807191268
+      farmerHats_164: -5260399778650095529
+      farmerHats_65: -7402348441728130064
+      farmerHats_156: 6216929454511012912
+      farmerHats_59: 4869394842064663118
+      farmerHats_151: -2084380650845455063
+      farmerHats_25: 8537200741839535695
+      farmerHats_10: -156619178177679747
+      farmerHats_186: -4934109159381012701
+      farmerHats_84: 5937158643454134405
+      farmerHats_43: 3740413726506623301
+      farmerHats_126: -4866896221659505983
+      farmerHats_106: -8938016988538543728
+      farmerHats_78: 6025216829372810140
+      farmerHats_15: 7205450377130497598
+      farmerHats_88: -2033510678616143476
+      farmerHats_60: 7524993270254409067
+      farmerHats_64: -2107128693149497900
+      farmerHats_62: -8751461467200758642
+      farmerHats_55: -6743768223354017065
+      farmerHats_37: 8563104773769669032
+      farmerHats_31: 3840350572292644689
+      farmerHats_110: -5650467469987897855
+      farmerHats_138: 2371658421557085128
+      farmerHats_21: 1966778764653375336
+      farmerHats_155: -7482169104339397195
+      farmerHats_120: -2103024294450176725
+      farmerHats_81: 5747447050039828245
+      farmerHats_103: -2426077668587913894
+      farmerHats_160: 8802681828288719365
+      farmerHats_181: -408872710281267842
+      farmerHats_33: 7117782736811629902
+      farmerHats_7: -6910803903170986764
+      farmerHats_54: 7531156137027643421
+      farmerHats_182: 1358949484958543134
+      farmerHats_109: -7884078729156098181
+      farmerHats_144: 5244536835732987262
+      farmerHats_24: 2019641250328146572
+      farmerHats_117: 4852969624068448791
+      farmerHats_42: 7326058538834396374
+      farmerHats_73: 5912141115499186287
+      farmerHats_179: 2978211281447295051
+      farmerHats_163: 162293353740686379
+      farmerHats_128: 621167000977206551
+      farmerHats_76: -1739763654535158719
+      farmerHats_85: 332448406206152207
+      farmerHats_105: -5971449122054965500
+      farmerHats_123: 980776639149571430
+      farmerHats_124: 2371596309084634452
+      farmerHats_149: -2473995457806943529
+      farmerHats_115: -1144427237844852088
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

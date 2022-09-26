@@ -99,7 +99,7 @@ TextureImporter:
       213: -2961396871861752453
     second: DugGround_31
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -119,6 +119,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -128,8 +130,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -150,9 +152,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -875,6 +881,39 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      DugGround_29: -2717033803204188961
+      DugGround_19: 3174740000172749308
+      DugGround_12: -4987229573879477163
+      DugGround_23: 5818661052790145292
+      DugGround_17: 7143828148132578542
+      DugGround_13: 818433697204119388
+      DugGround_16: 17334880324610018
+      DugGround_28: 8316314858200970040
+      DugGround_20: -5815133488013185899
+      DugGround_8: -1144834211054590616
+      DugGround_0: 5588880199808461859
+      DugGround_31: -2961396871861752453
+      DugGround_5: 3766865763359371942
+      DugGround_15: -1397365509746193196
+      DugGround_10: -8186299728689910322
+      DugGround_1: -6124715397737624461
+      DugGround_27: -6878932850842707370
+      DugGround_6: 4104806012796865313
+      DugGround_22: -4872621163021313545
+      DugGround_18: 7591868225199800783
+      DugGround_14: 6933223335694393071
+      DugGround_26: -5750998479089953526
+      DugGround_4: 9185315290136886186
+      DugGround_2: 7303584569058495136
+      DugGround_3: -8482852301027147495
+      DugGround_30: 2655803857110052468
+      DugGround_21: -8266863679620031733
+      DugGround_7: -4060529681369373566
+      DugGround_24: 1301980698495550940
+      DugGround_11: 7364767379561946811
+      DugGround_25: 6122583050134324219
+      DugGround_9: -2463700668463398288
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

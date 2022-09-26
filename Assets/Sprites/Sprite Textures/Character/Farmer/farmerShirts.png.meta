@@ -15,7 +15,7 @@ TextureImporter:
       213: 21300006
     second: farmerShirts_3
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -35,6 +35,8 @@ TextureImporter:
   isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -44,8 +46,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -66,9 +68,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -125,7 +131,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 157d795c73f72794f900affa11d2e044
-      internalID: 0
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -146,7 +152,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 2be2814e808dd69439ca2551f0ddaaeb
-      internalID: 0
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -167,7 +173,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 229181acabd9cd248b808bc30d82fc83
-      internalID: 0
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -188,7 +194,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 1926b9bc9dcd7a34180f9c3f1f2b53f0
-      internalID: 0
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -203,6 +209,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      farmerShirts_1: 21300002
+      farmerShirts_2: 21300004
+      farmerShirts_3: 21300006
+      farmerShirts_0: 21300000
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
