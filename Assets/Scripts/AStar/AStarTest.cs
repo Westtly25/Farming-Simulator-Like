@@ -34,7 +34,5 @@ public class AStarTest : MonoBehaviour
             npcPath.BuildPath(npcScheduleEvent);
 
         }
-
-
     }
 }

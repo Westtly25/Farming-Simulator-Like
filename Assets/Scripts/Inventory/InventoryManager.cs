@@ -16,7 +16,11 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
     [SerializeField] private SO_ItemList itemList = null;
 
     private string _iSaveableUniqueID;
-    public string ISaveableUniqueID { get { return _iSaveableUniqueID; } set { _iSaveableUniqueID = value; } }
+    public string ISaveableUniqueID
+    {
+        get => _iSaveableUniqueID;
+        set => _iSaveableUniqueID = value;
+    }
 
     private GameObjectSave _gameObjectSave;
     public GameObjectSave GameObjectSave { get { return _gameObjectSave; } set { _gameObjectSave = value; } }

@@ -4158,7 +4158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 492234701}
   m_Layer: 0
-  m_Name: Time Manager
+  m_Name: Game Time Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7772,7 +7772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 894496167}
   m_Layer: 0
-  m_Name: Inventory Manger
+  m_Name: Inventory Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

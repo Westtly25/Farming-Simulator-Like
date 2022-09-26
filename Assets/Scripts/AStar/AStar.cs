@@ -23,14 +23,14 @@ public class AStar : MonoBehaviour
     private List<Node> openNodeList;
     private HashSet<Node> closedNodeList;
 
-    private bool pathFound = false;
+    private bool isPathFound = false;
 
     /// <summary>
     /// Builds a path for the given sceneName, from the startGridPosition to the endGridPosition, and adds movement steps to the passed in npcMovementStack.  Also returns true if path found or false if no path found.
     /// </summary>
     public bool BuildPath(SceneName sceneName, Vector2Int startGridPosition, Vector2Int endGridPosition, Stack<NPCMovementStep> npcMovementStepStack)
     {
-        pathFound = false;
+        isPathFound = false;
 
         if (PopulateGridNodesFromGridPropertiesDictionary(sceneName, startGridPosition, endGridPosition))
         {
@@ -87,7 +87,7 @@ public class AStar : MonoBehaviour
 
             if (currentNode == targetNode)
             {
-                pathFound = true;
+                isPathFound = true;
                 break;
             }
 
@@ -95,7 +95,7 @@ public class AStar : MonoBehaviour
             EvaluateCurrentNodeNeighbours(currentNode);
         }
 
-        if (pathFound)
+        if (isPathFound)
         {
             return true;
         }

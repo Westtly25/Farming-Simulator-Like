@@ -2,10 +2,10 @@
 
 public class GridNodes
 {
-    private int width;
-    private int height;
+    private readonly int width;
+    private readonly int height;
 
-    private Node[,] gridNode;
+    private readonly Node[,] gridNode;
 
     public GridNodes(int width, int height)
     {
