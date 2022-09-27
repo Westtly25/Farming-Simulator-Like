@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class UIInventoryBar : MonoBehaviour
 {
@@ -9,12 +10,25 @@ public class UIInventoryBar : MonoBehaviour
     public GameObject inventoryBarDraggedItem;
     [HideInInspector] public GameObject inventoryTextBoxGameobject;
 
+    [Header("Injected Components")]
+    private IInventoryManager inventoryManager;
 
     private RectTransform rectTransform;
 
     private bool _isInventoryBarPositionBottom = true;
 
-    public bool IsInventoryBarPositionBottom { get => _isInventoryBarPositionBottom; set => _isInventoryBarPositionBottom = value; }
+    public bool IsInventoryBarPositionBottom
+    {
+        get => _isInventoryBarPositionBottom;
+        set => _isInventoryBarPositionBottom = value;
+    }
+
+    [Inject]
+    public void Construct(IInventoryManager inventoryManager)
+    {
+        this.inventoryManager = inventoryManager;
+    }
+
 
     private void Awake()
     {
@@ -31,16 +45,12 @@ public class UIInventoryBar : MonoBehaviour
         EventHandler.InventoryUpdatedEvent += InventoryUpdated;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         // Switch inventory bar position depending on player position
         SwitchInventoryBarPosition();
     }
 
-    /// <summary>
-    /// Clear all highlights from the inventory bar
-    /// </summary>
     public void ClearHighlightOnInventorySlots()
     {
         if (inventorySlot.Length > 0)
@@ -53,12 +63,11 @@ public class UIInventoryBar : MonoBehaviour
                     inventorySlot[i].isSelected = false;
                     inventorySlot[i].inventorySlotHighlight.color = new Color(0f, 0f, 0f, 0f);
                     // Update inventory to show item as not selected
-                    InventoryManager.Instance.ClearSelectedInventoryItem(InventoryLocation.player);
+                    inventoryManager.ClearSelectedInventoryItem(InventoryLocation.player);
                 }
             }
         }
     }
-
 
     private void ClearInventorySlots()
     {
@@ -94,7 +103,7 @@ public class UIInventoryBar : MonoBehaviour
                         int itemCode = inventoryList[i].itemCode;
 
                         // ItemDetails itemDetails = InventoryManager.Instance.itemList.itemDetails.Find(x => x.itemCode == itemCode);
-                        ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(itemCode);
+                        ItemDetails itemDetails = inventoryManager.GetItemDetails(itemCode);
 
                         if (itemDetails != null)
                         {
@@ -104,7 +113,6 @@ public class UIInventoryBar : MonoBehaviour
                             inventorySlot[i].itemDetails = itemDetails;
                             inventorySlot[i].itemQuantity = inventoryList[i].itemQuantity;
                             SetHighlightedInventorySlots(i);
-
                         }
                     }
                     else
@@ -116,10 +124,6 @@ public class UIInventoryBar : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    ///  Set the selected highlight if set on all inventory item positions
-    /// </summary>
     public void SetHighlightedInventorySlots()
     {
         if (inventorySlot.Length > 0)
@@ -132,9 +136,6 @@ public class UIInventoryBar : MonoBehaviour
         }
     }
 
-    /// <summary>
-    ///  Set the selected highlight if set on an inventory item for a given slot item position
-    /// </summary>
     public void SetHighlightedInventorySlots(int itemPosition)
     {
         if (inventorySlot.Length > 0 && inventorySlot[itemPosition].itemDetails != null)
@@ -144,7 +145,7 @@ public class UIInventoryBar : MonoBehaviour
                 inventorySlot[itemPosition].inventorySlotHighlight.color = new Color(1f, 1f, 1f, 1f);
 
                 // Update inventory to show item as selected
-                InventoryManager.Instance.SetSelectedInventoryItem(InventoryLocation.player, inventorySlot[itemPosition].itemDetails.itemCode);
+                inventoryManager.SetSelectedInventoryItem(InventoryLocation.player, inventorySlot[itemPosition].itemDetails.itemCode);
             }
         }
     }
@@ -194,6 +195,4 @@ public class UIInventoryBar : MonoBehaviour
             inventorySlot[i].ClearSelectedItem();
         }
     }
-
-
 }

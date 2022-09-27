@@ -13,7 +13,5 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
         // Set starting weather
         currentWeather = Weather.dry;
-
-
     }
 }

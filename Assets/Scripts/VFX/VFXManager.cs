@@ -11,7 +11,6 @@ public class VFXManager : SingletonMonobehaviour<VFXManager>
     [SerializeField] private GameObject breakingStonePrefab = null;
     [SerializeField] private GameObject reapingPrefab = null;
 
-
     protected override void Awake()
     {
         base.Awake();

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -18,6 +19,15 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
    // private Vector3 startingPosition;
     public GameObject draggedItem;
     private Canvas parentCanvas;
+
+    private IInventoryManager inventoryManager;
+
+    [Inject]
+    public void Construct(IInventoryManager inventoryManager)
+    {
+        this.inventoryManager = inventoryManager;
+    }
+
 
     private void Awake()
     {
@@ -61,7 +71,7 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
                 int toSlotNumber = eventData.pointerCurrentRaycast.gameObject.GetComponent<PauseMenuInventoryManagementSlot>().slotNumber;
 
                 // Swap inventory items in inventory list
-                InventoryManager.Instance.SwapInventoryItems(InventoryLocation.player, slotNumber, toSlotNumber);
+                inventoryManager.SwapInventoryItems(InventoryLocation.player, slotNumber, toSlotNumber);
 
                 // Destroy inventory text box
                 inventoryManagement.DestroyInventoryTextBoxGameobject();
@@ -81,7 +91,7 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
             UIInventoryTextBox inventoryTextBox = inventoryManagement.inventoryTextBoxGameobject.GetComponent<UIInventoryTextBox>();
 
             // Set item type description
-            string itemTypeDescription = InventoryManager.Instance.GetItemTypeDescription(itemDetails.itemType);
+            string itemTypeDescription = inventoryManager.GetItemTypeDescription(itemDetails.itemType);
 
             // Populate text box
             inventoryTextBox.SetTextboxText(itemDetails.itemDescription, itemTypeDescription, "", itemDetails.itemLongDescription, "", "");
@@ -104,5 +114,4 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
     {
         inventoryManagement.DestroyInventoryTextBoxGameobject();
     }
-
 }

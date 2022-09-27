@@ -11,7 +11,6 @@ public delegate void MovementDelegate(float inputX, float inputY, bool isWalking
 
 public static class EventHandler
 {
-    // Drop selected item event
     public static event Action DropSelectedItemEvent;
 
     public static void CallDropSelectedItemEvent()
@@ -20,7 +19,6 @@ public static class EventHandler
             DropSelectedItemEvent();
     }
 
-    // Remove selected item from inventory
     public static event Action RemoveSelectedItemFromInventoryEvent;
 
     public static void CallRemoveSelectedItemFromInventoryEvent()
@@ -29,9 +27,6 @@ public static class EventHandler
             RemoveSelectedItemFromInventoryEvent();
     }
 
-
-
-    // Harvest Action Effect Event
     public static event Action<Vector3, HarvestActionEffect> HarvestActionEffectEvent;
 
     public static void CallHarvestActionEffectEvent(Vector3 effectPosition, HarvestActionEffect harvestActionEffect)
@@ -40,9 +35,6 @@ public static class EventHandler
             HarvestActionEffectEvent(effectPosition, harvestActionEffect);
     }
 
-
-
-    // Inventory Updated Event
     public static event Action<InventoryLocation, List<InventoryItem>> InventoryUpdatedEvent;
 
     public static void CallInventoryUpdatedEvent(InventoryLocation inventoryLocation, List<InventoryItem> inventoryList)
@@ -51,7 +43,6 @@ public static class EventHandler
             InventoryUpdatedEvent(inventoryLocation, inventoryList);
     }
 
-    // Instantiate crop prefabs
     public static event Action InstantiateCropPrefabsEvent;
 
     public static void CallInstantiateCropPrefabsEvent()
@@ -63,10 +54,8 @@ public static class EventHandler
     }
 
 
-    // Movement Event
     public static event MovementDelegate MovementEvent;
 
-    // Movement Event Call For Publishers
     public static void CallMovementEvent(float inputX, float inputY, bool isWalking, bool isRunning, bool isIdle, bool isCarrying, ToolEffect toolEffect,
     bool isUsingToolRight, bool isUsingToolLeft, bool isUsingToolUp, bool isUsingToolDown,
     bool isLiftingToolRight, bool isLiftingToolLeft, bool isLiftingToolUp, bool isLiftingToolDown,

@@ -29,8 +29,6 @@ public class ItemNudge : MonoBehaviour
             {
                 AudioManager.Instance.PlaySound(SoundName.effectRustle);
             }
-
-
         }
     }
 

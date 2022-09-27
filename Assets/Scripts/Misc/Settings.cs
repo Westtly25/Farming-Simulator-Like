@@ -5,14 +5,13 @@ public static class Settings
     // Scenes
     public const string PersistentScene = "PersistentScene";
 
-    // Obscuring Item Fading - ObscuringItemFader
     public const float fadeInSeconds = 0.25f;
     public const float fadeOutSeconds = 0.35f;
     public const float targetAlpha = 0.45f;
 
     // Tilemap
-    public const float gridCellSize = 1f; // grid cell size in unity units
-    public const float gridCellDiagonalSize = 1.41f; // diagonal distance between unity cell centres
+    public const float gridCellSize = 1f;
+    public const float gridCellDiagonalSize = 1.41f;
     public const int maxGridWidth = 99999;
     public const int maxGridHeight = 99999;
     public static Vector2 cursorSize = Vector2.one;

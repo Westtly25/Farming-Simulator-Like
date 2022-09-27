@@ -14,5 +14,4 @@ public class Vector3Serializable
     public Vector3Serializable()
     {
     }
-
 }

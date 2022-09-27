@@ -1,10 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveable
+public interface IInventoryManager
 {
-    private UIInventoryBar inventoryBar;
+    void AddItem(InventoryLocation inventoryLocation, Item item);
+    void AddItem(InventoryLocation inventoryLocation, Item item, GameObject gameObjectToDelete);
+    void RemoveItem(InventoryLocation inventoryLocation, int itemCode);
+    void SwapInventoryItems(InventoryLocation inventoryLocation, int fromItem, int toItem);
+    void ClearSelectedInventoryItem(InventoryLocation inventoryLocation);
+    void SetSelectedInventoryItem(InventoryLocation inventoryLocation, int itemCode);
+    ItemDetails GetItemDetails(int itemCode);
+    ItemDetails GetSelectedInventoryItemDetails(InventoryLocation inventoryLocation);
+    string GetItemTypeDescription(ItemType itemType);
+}
 
+public class InventoryManager : IInventoryManager, ISaveable, IInitializable, IDisposable
+{
     private Dictionary<int, ItemDetails> itemDetailsDictionary;
 
     private int[] selectedInventoryItem;
@@ -29,11 +42,19 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
         set => gameObjectSave = value;
     }
 
-
-    protected override void Awake()
+    public void Initialize()
     {
-        base.Awake();
+        Setup();
+        ISaveableRegister();
+    }
 
+    public void Dispose()
+    {
+        ISaveableDeregister();
+    }
+
+    protected void Setup()
+    {
         CreateInventoryLists();
 
         CreateItemDetailsDictionary();
@@ -45,25 +66,10 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
             selectedInventoryItem[i] = -1;
         }
 
-        ISaveableUniqueID = GetComponent<GenerateGUID>().GUID;
+        //ISaveableUniqueID = GetComponent<GenerateGUID>().GUID;
 
         GameObjectSave = new GameObjectSave();
-    }
 
-    private void OnDisable()
-    {
-        ISaveableDeregister();
-    }
-
-
-    private void OnEnable()
-    {
-        ISaveableRegister();
-    }
-
-    private void Start()
-    {
-        inventoryBar = FindObjectOfType<UIInventoryBar>();
     }
 
     private void CreateInventoryLists()
@@ -94,7 +100,7 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
     {
         AddItem(inventoryLocation, item);
 
-        Destroy(gameObjectToDelete);
+        //Destroy(gameObjectToDelete);
     }
 
     public void AddItem(InventoryLocation inventoryLocation, Item item)
@@ -271,7 +277,6 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
 
     public GameObjectSave ISaveableSave()
     {
-        // Create new scene save
         SceneSave sceneSave = new SceneSave();
 
         GameObjectSave.sceneData.Remove(Settings.PersistentScene);
@@ -281,7 +286,6 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
         sceneSave.intArrayDictionary = new Dictionary<string, int[]>();
         sceneSave.intArrayDictionary.Add("inventoryListCapacityArray", inventoryListCapacityIntArray);
 
-        // Add scene save for gameobject
         GameObjectSave.sceneData.Add(Settings.PersistentScene, sceneSave);
 
         return GameObjectSave;
@@ -307,7 +311,7 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
 
                     Player.Instance.ClearCarriedItem();
 
-                    inventoryBar.ClearHighlightOnInventorySlots();
+                    //inventoryBar.ClearHighlightOnInventorySlots();
                 }
 
                 if (sceneSave.intArrayDictionary != null && sceneSave.intArrayDictionary.TryGetValue("inventoryListCapacityArray", out int[] inventoryCapacityArray))
@@ -367,4 +371,5 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
     {
         selectedInventoryItem[(int)inventoryLocation] = itemCode;
     }
+
 }
