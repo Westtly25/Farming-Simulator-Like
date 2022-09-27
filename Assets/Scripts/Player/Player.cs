@@ -36,9 +36,9 @@ public interface IMovement
 public class Movement : IMovement
 {
     [Header("Character Data")]
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private float walkinggSpeed;
-    [SerializeField] private float runningSpeed;
+    [SerializeField] private readonly float movementSpeed;
+    [SerializeField] private readonly float walkinggSpeed;
+    [SerializeField] private readonly float runningSpeed;
 
     private const float KOEF = 0.71f;
 
@@ -58,8 +58,6 @@ public class Movement : IMovement
         return new Vector2(xInput, yInput) * movementSpeed * Time.deltaTime;
     }
 }
-
-
 
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -341,11 +339,9 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
         Vector3Int playerDirection = GetPlayerClickDirection(cursorGridPosition, playerGridPosition);
 
-        // Get Grid property details at cursor position (the GridCursor validation routine ensures that grid property details are not null)
         GridPropertyDetails gridPropertyDetails = GridPropertiesManager.Instance.GetGridPropertyDetails(cursorGridPosition.x, cursorGridPosition.y);
 
-        // Get Selected item details
-        ItemDetails itemDetails = InventoryManager.Instance.GetSelectedInventoryItemDetails(InventoryLocation.player);
+        ItemDetails itemDetails = null;//InventoryManager.Instance.GetSelectedInventoryItemDetails(InventoryLocation.player);
 
         if (itemDetails != null)
         {
@@ -441,7 +437,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             EventHandler.CallDropSelectedItemEvent();
         }
     }
-
     private void PlantSeedAtCursor(GridPropertyDetails gridPropertyDetails, ItemDetails itemDetails)
     {
         // Process if we have cropdetails for the seed
@@ -463,7 +458,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         }
 
     }
-
     private void ProcessPlayerClickInputCommodity(ItemDetails itemDetails)
     {
         if (itemDetails.canBeDropped && gridCursor.CursorPositionIsValid)
@@ -471,7 +465,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             EventHandler.CallDropSelectedItemEvent();
         }
     }
-
     private void ProcessPlayerClickInputTool(GridPropertyDetails gridPropertyDetails, ItemDetails itemDetails, Vector3Int playerDirection)
     {
         // Switch on tool
@@ -526,7 +519,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                 break;
         }
     }
-
     private void HoeGroundAtCursor(GridPropertyDetails gridPropertyDetails, Vector3Int playerDirection)
     {
         //Play sound
@@ -535,7 +527,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Trigger animation
         StartCoroutine(HoeGroundAtCursorRoutine(playerDirection, gridPropertyDetails));
     }
-
     private IEnumerator HoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails)
     {
         PlayerInputIsDisabled = true;
@@ -585,7 +576,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         PlayerInputIsDisabled = false;
         playerToolUseDisabled = false;
     }
-
     private void WaterGroundAtCursor(GridPropertyDetails gridPropertyDetails, Vector3Int playerDirection)
     {
         //Play sound
@@ -594,7 +584,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Trigger animation
         StartCoroutine(WaterGroundAtCursorRoutine(playerDirection, gridPropertyDetails));
     }
-
     private IEnumerator WaterGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails)
     {
         PlayerInputIsDisabled = true;
@@ -646,7 +635,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         PlayerInputIsDisabled = false;
         playerToolUseDisabled = false;
     }
-
     private void ChopInPlayerDirection(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
         // Play sound
@@ -655,8 +643,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         // Trigger animation
         StartCoroutine(ChopInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection));
     }
-
-        private IEnumerator ChopInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
+    private IEnumerator ChopInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
         PlayerInputIsDisabled = true;
         playerToolUseDisabled = true;
@@ -677,9 +664,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         PlayerInputIsDisabled = false;
         playerToolUseDisabled = false;
     }
-
-
-
     private void CollectInPlayerDirection(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
         // Play sound
@@ -687,8 +671,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
         StartCoroutine(CollectInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection));
     }
-
-
     private IEnumerator CollectInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
         PlayerInputIsDisabled = true;
@@ -704,7 +686,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         PlayerInputIsDisabled = false;
         playerToolUseDisabled = false;
     }
-
     private void BreakInPlayerDirection(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
         // Play sound
@@ -712,7 +693,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
         StartCoroutine(BreakInPlayerDirectionRoutine(gridPropertyDetails, equippedItemDetails, playerDirection));
     }
-
     private IEnumerator BreakInPlayerDirectionRoutine(GridPropertyDetails gridPropertyDetails, ItemDetails equippedItemDetails, Vector3Int playerDirection)
     {
         PlayerInputIsDisabled = true;
@@ -804,7 +784,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
                 if (itemArray[i] != null)
                 {
                     // Destroy item game object if reapable
-                    if (InventoryManager.Instance.GetItemDetails(itemArray[i].ItemCode).itemType == ItemType.Reapable_scenary)
+                    if ( true) //InventoryManager.Instance.GetItemDetails(itemArray[i].ItemCode).itemType == ItemType.Reapable_scenary)
                     {
                         // Effect position
                         Vector3 effectPosition = new Vector3(itemArray[i].transform.position.x, itemArray[i].transform.position.y + Settings.gridCellSize / 2f, itemArray[i].transform.position.z);
@@ -826,10 +806,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         }
     }
 
-
-    /// <summary>
-    /// Method processes crop with equipped item in player direction
-    /// </summary>
     private void ProcessCropWithEquippedItemInPlayerDirection(Vector3Int playerDirection, ItemDetails equippedItemDetails, GridPropertyDetails gridPropertyDetails)
     {
         switch (equippedItemDetails.itemType)
@@ -952,7 +928,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     public void ShowCarriedItem(int itemCode)
     {
-        ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(itemCode);
+        ItemDetails itemDetails = null;// InventoryManager.Instance.GetItemDetails(itemCode);
         if (itemDetails != null)
         {
             equippedItemSpriteRenderer.sprite = itemDetails.itemSprite;

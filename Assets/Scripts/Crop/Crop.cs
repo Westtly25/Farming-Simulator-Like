@@ -177,7 +177,7 @@ public class Crop : MonoBehaviour
                 Vector3 spawnPosition;
                 if (cropDetails.spawnCropProducedAtPlayerPosition)
                 {
-                    inventoryManager.AddItem(InventoryLocation.player, cropDetails.cropProducedItemCode[i]);
+                    inventoryManager.AddItem(InventoryLocation.player, cropDetails.cropProducedItemCode[i]);Mo
                 }
                 else
                 {
