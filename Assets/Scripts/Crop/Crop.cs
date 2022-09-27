@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class Crop : MonoBehaviour
 {
@@ -14,6 +15,15 @@ public class Crop : MonoBehaviour
     [HideInInspector]
     public Vector2Int cropGridPosition;
 
+    [Header("Injected Components")]
+    private IInventoryManager inventoryManager;
+
+    [Inject]
+    public void Constructor(IInventoryManager inventoryManager)
+    {
+        this.inventoryManager = inventoryManager;
+    }
+
 
     public void ProcessToolAction(ItemDetails equippedItemDetails, bool isToolRight, bool isToolLeft, bool isToolDown, bool isToolUp)
     {
@@ -24,7 +34,7 @@ public class Crop : MonoBehaviour
             return;
 
         // Get seed item details
-        ItemDetails seedItemDetails = InventoryManager.Instance.GetItemDetails(gridPropertyDetails.seedItemCode);
+        ItemDetails seedItemDetails = inventoryManager.GetItemDetails(gridPropertyDetails.seedItemCode);
         if (seedItemDetails == null)
             return;
 
@@ -187,7 +197,7 @@ public class Crop : MonoBehaviour
                 if (cropDetails.spawnCropProducedAtPlayerPosition)
                 {
                     //  Add item to the players inventory
-                    InventoryManager.Instance.AddItem(InventoryLocation.player, cropDetails.cropProducedItemCode[i]);
+                    inventoryManager.AddItem(InventoryLocation.player, cropDetails.cropProducedItemCode[i]);
                 }
                 else
                 {

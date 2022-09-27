@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class GridCursor : MonoBehaviour
 {
@@ -13,17 +14,42 @@ public class GridCursor : MonoBehaviour
     [SerializeField] private Sprite redCursorSprite = null;
     [SerializeField] private SO_CropDetailsList so_CropDetailsList = null;
 
-    private bool _cursorPositionIsValid = false;
-    public bool CursorPositionIsValid { get => _cursorPositionIsValid; set => _cursorPositionIsValid = value; }
+    private bool cursorPositionIsValid = false;
+    public bool CursorPositionIsValid
+    {
+        get => cursorPositionIsValid;
+        set => cursorPositionIsValid = value;
+    }
 
-    private int _itemUseGridRadius = 0;
-    public int ItemUseGridRadius { get => _itemUseGridRadius; set => _itemUseGridRadius = value; }
+    private int itemUseGridRadius = 0;
+    public int ItemUseGridRadius
+    {
+        get => itemUseGridRadius;
+        set => itemUseGridRadius = value;
+    }
 
-    private ItemType _selectedItemType;
-    public ItemType SelectedItemType { get => _selectedItemType; set => _selectedItemType = value; }
+    private ItemType selectedItemType;
+    public ItemType SelectedItemType
+    {
+        get => selectedItemType;
+        set => selectedItemType = value;
+    }
 
-    private bool _cursorIsEnabled = false;
-    public bool CursorIsEnabled { get => _cursorIsEnabled; set => _cursorIsEnabled = value; }
+    private bool cursorIsEnabled = false;
+    public bool CursorIsEnabled
+    {
+        get => cursorIsEnabled;
+        set => cursorIsEnabled = value;
+    }
+
+    [Header("Injected Components")]
+    private IInventoryManager inventoryManager;
+
+    [Inject]
+    public void Constructor(IInventoryManager inventoryManager)
+    {
+        this.inventoryManager = inventoryManager;
+    }
 
     private void OnDisable()
     {
@@ -35,14 +61,12 @@ public class GridCursor : MonoBehaviour
         EventHandler.AfterSceneLoadEvent += SceneLoaded;
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         mainCamera = Camera.main;
         canvas = GetComponentInParent<Canvas>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (CursorIsEnabled)
@@ -55,16 +79,12 @@ public class GridCursor : MonoBehaviour
     {
         if (grid != null)
         {
-            // Get grid position for cursor
             Vector3Int gridPosition = GetGridPositionForCursor();
 
-            // Get grid position for player
             Vector3Int playerGridPosition = GetGridPositionForPlayer();
 
-            // Set cursor sprite
             SetCursorValidity(gridPosition, playerGridPosition);
 
-            // Get rect transform position for cursor
             cursorRectTransform.position = GetRectTransformPositionForCursor(gridPosition);
 
             return gridPosition;
@@ -84,7 +104,6 @@ public class GridCursor : MonoBehaviour
     {
         SetCursorToValid();
 
-        // Check item use radius is valid
         if (Mathf.Abs(cursorGridPosition.x - playerGridPosition.x) > ItemUseGridRadius
             || Mathf.Abs(cursorGridPosition.y - playerGridPosition.y) > ItemUseGridRadius)
         {
@@ -92,8 +111,7 @@ public class GridCursor : MonoBehaviour
             return;
         }
 
-        // Get selected item details
-        ItemDetails itemDetails = InventoryManager.Instance.GetSelectedInventoryItemDetails(InventoryLocation.player);
+        ItemDetails itemDetails = inventoryManager.GetSelectedInventoryItemDetails(InventoryLocation.player);
 
         if (itemDetails == null)
         {
@@ -101,12 +119,10 @@ public class GridCursor : MonoBehaviour
             return;
         }
 
-        // Get grid property details at cursor position
         GridPropertyDetails gridPropertyDetails = GridPropertiesManager.Instance.GetGridPropertyDetails(cursorGridPosition.x, cursorGridPosition.y);
 
         if (gridPropertyDetails != null)
         {
-            // Determine cursor validity based on inventory item selected and grid property details
             switch (itemDetails.itemType)
             {
                 case ItemType.Seed:
@@ -156,43 +172,28 @@ public class GridCursor : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Set the cursor to be invalid
-    /// </summary>
     private void SetCursorToInvalid()
     {
         cursorImage.sprite = redCursorSprite;
         CursorPositionIsValid = false;
     }
 
-    /// <summary>
-    /// Set the cursor to be valid
-    /// </summary>
     private void SetCursorToValid()
     {
         cursorImage.sprite = greenCursorSprite;
         CursorPositionIsValid = true;
     }
 
-    /// <summary>
-    /// Test cursor validity for a commodity for the target gridPropertyDetails. Returns true if valid, false if invalid
-    /// </summary>
     private bool IsCursorValidForCommodity(GridPropertyDetails gridPropertyDetails)
     {
         return gridPropertyDetails.canDropItem;
     }
 
-    /// <summary>
-    /// Set cursor validity for a seed for the target gridPropertyDetails. Returns true if valid, false if invalid
-    /// </summary>
     private bool IsCursorValidForSeed(GridPropertyDetails gridPropertyDetails)
     {
         return gridPropertyDetails.canDropItem;
     }
 
-    /// <summary>
-    /// Sets the cursor as either valid or invalid for the tool for the target gridPropertyDetails. Returns true if valid or false if invalid
-    /// </summary>
     private bool IsCursorValidForTool(GridPropertyDetails gridPropertyDetails, ItemDetails itemDetails)
     {
         // Switch on tool
@@ -213,12 +214,11 @@ public class GridCursor : MonoBehaviour
 
                     #endregion Need to get any items at location so we can check if they are reapable
 
-                    // Loop through items found to see if any are reapable type - we are not going to let the player dig where there are reapable scenary items
                     bool foundReapable = false;
 
                     foreach (Item item in itemList)
                     {
-                        if (InventoryManager.Instance.GetItemDetails(item.ItemCode).itemType == ItemType.Reapable_scenary)
+                        if (inventoryManager.GetItemDetails(item.ItemCode).itemType == ItemType.Reapable_scenary)
                         {
                             foundReapable = true;
                             break;
@@ -253,21 +253,14 @@ public class GridCursor : MonoBehaviour
             case ItemType.Collecting_tool:
             case ItemType.Breaking_tool:
 
-                // Check if item can be harvested with item selected, check item is fully grown
-
-                // Check if seed planted
                 if (gridPropertyDetails.seedItemCode != -1)
                 {
-                    // Get crop details for seed
                     CropDetails cropDetails = so_CropDetailsList.GetCropDetails(gridPropertyDetails.seedItemCode);
 
-                    // if crop details found
                     if (cropDetails != null)
                     {
-                        // Check if crop fully grown
                         if (gridPropertyDetails.growthDays >= cropDetails.growthDays[cropDetails.growthDays.Length - 1])
                         {
-                            // Check if crop can be harvested with tool selected
                             if (cropDetails.CanUseToolToHarvestCrop(itemDetails.itemCode))
                             {
                                 return true;

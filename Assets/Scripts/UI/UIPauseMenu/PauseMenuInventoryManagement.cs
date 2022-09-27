@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Security.Policy;
 using UnityEngine;
+using Zenject;
 
 public class PauseMenuInventoryManagement : MonoBehaviour
 {
@@ -12,15 +14,23 @@ public class PauseMenuInventoryManagement : MonoBehaviour
 
     [HideInInspector] public GameObject inventoryTextBoxGameobject;
 
+    [Header("Injected Components")]
+    private IInventoryManager inventoryManager;
+
+    [Inject]
+    public void Constructor(IInventoryManager inventoryManager)
+    {
+        this.inventoryManager = inventoryManager;
+    }
 
     private void OnEnable()
     {
         EventHandler.InventoryUpdatedEvent += PopulatePlayerInventory;
 
         // Populate player inventory
-        if (InventoryManager.Instance != null)
+        if (inventoryManager != null)
         {
-            PopulatePlayerInventory(InventoryLocation.player, InventoryManager.Instance.inventoryLists[(int)InventoryLocation.player]);
+            PopulatePlayerInventory(InventoryLocation.player, inventoryManager.inventoryLists[(int)InventoryLocation.player]);
         }
     }
 
@@ -43,7 +53,7 @@ public class PauseMenuInventoryManagement : MonoBehaviour
     public void DestroyCurrentlyDraggedItems()
     {
         // loop through all player inventory items
-        for (int i = 0; i < InventoryManager.Instance.inventoryLists[(int)InventoryLocation.player].Count; i++)
+        for (int i = 0; i < inventoryManager.inventoryLists[(int)InventoryLocation.player].Count; i++)
         {
             if (inventoryManagementSlot[i].draggedItem != null)
             {
@@ -60,10 +70,10 @@ public class PauseMenuInventoryManagement : MonoBehaviour
             InitialiseInventoryManagementSlots();
 
             // loop through all player inventory items
-            for (int i = 0; i < InventoryManager.Instance.inventoryLists[(int)InventoryLocation.player].Count; i++)
+            for (int i = 0; i < inventoryManager.InventoryLists[(int)InventoryLocation.player].Count; i++)
             {
                 // Get inventory item details
-                inventoryManagementSlot[i].itemDetails = InventoryManager.Instance.GetItemDetails(playerInventoryList[i].itemCode);
+                inventoryManagementSlot[i].itemDetails = inventoryManager.GetItemDetails(playerInventoryList[i].itemCode);
                 inventoryManagementSlot[i].itemQuantity = playerInventoryList[i].itemQuantity;
 
                 if (inventoryManagementSlot[i].itemDetails != null)

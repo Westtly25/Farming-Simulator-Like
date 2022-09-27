@@ -28,7 +28,6 @@ public class PauseMenuInventoryManagementSlot : MonoBehaviour, IBeginDragHandler
         this.inventoryManager = inventoryManager;
     }
 
-
     private void Awake()
     {
         parentCanvas = GetComponentInParent<Canvas>();

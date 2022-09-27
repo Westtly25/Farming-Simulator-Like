@@ -5,6 +5,8 @@ using Zenject;
 
 public interface IInventoryManager
 {
+    List<InventoryItem>[] InventoryList { get; }
+
     void AddItem(InventoryLocation inventoryLocation, Item item);
     void AddItem(InventoryLocation inventoryLocation, Item item, GameObject gameObjectToDelete);
     void RemoveItem(InventoryLocation inventoryLocation, int itemCode);
@@ -22,7 +24,12 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
 
     private int[] selectedInventoryItem;
 
-    public List<InventoryItem>[] inventoryLists;
+    private List<InventoryItem>[] inventoryList;
+    public List<InventoryItem>[] InventoryList
+    {
+        get => inventoryList;
+        private set => inventoryList = value;
+    }
 
     [HideInInspector] public int[] inventoryListCapacityIntArray;
 
@@ -74,11 +81,11 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
 
     private void CreateInventoryLists()
     {
-        inventoryLists = new List<InventoryItem>[(int)InventoryLocation.count];
+        InventoryList = new List<InventoryItem>[(int)InventoryLocation.count];
 
         for (int i = 0; i < (int)InventoryLocation.count; i++)
         {
-            inventoryLists[i] = new List<InventoryItem>();
+            InventoryList[i] = new List<InventoryItem>();
         }
 
         inventoryListCapacityIntArray = new int[(int)InventoryLocation.count];
@@ -106,7 +113,7 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
     public void AddItem(InventoryLocation inventoryLocation, Item item)
     {
         int itemCode = item.ItemCode;
-        List<InventoryItem> inventoryList = inventoryLists[(int)inventoryLocation];
+        List<InventoryItem> inventoryList = InventoryList[(int)inventoryLocation];
 
         int itemPosition = FindItemInInventory(inventoryLocation, itemCode);
 
@@ -119,12 +126,12 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
             AddItemAtPosition(inventoryList, itemCode);
         }
 
-        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryLists[(int)inventoryLocation]);
+        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, InventoryList[(int)inventoryLocation]);
     }
 
     public void AddItem(InventoryLocation inventoryLocation, int itemCode)
     {
-        List<InventoryItem> inventoryList = inventoryLists[(int)inventoryLocation];
+        List<InventoryItem> inventoryList = InventoryList[(int)inventoryLocation];
 
         int itemPosition = FindItemInInventory(inventoryLocation, itemCode);
 
@@ -137,7 +144,7 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
             AddItemAtPosition(inventoryList, itemCode);
         }
 
-        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryLists[(int)inventoryLocation]);
+        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, InventoryList[(int)inventoryLocation]);
     }
 
     private void AddItemAtPosition(List<InventoryItem> inventoryList, int itemCode)
@@ -161,16 +168,16 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
 
     public void SwapInventoryItems(InventoryLocation inventoryLocation, int fromItem, int toItem)
     {
-        if (fromItem < inventoryLists[(int)inventoryLocation].Count && toItem < inventoryLists[(int)inventoryLocation].Count
+        if (fromItem < InventoryList[(int)inventoryLocation].Count && toItem < InventoryList[(int)inventoryLocation].Count
              && fromItem != toItem && fromItem >= 0 && toItem >= 0)
         {
-            InventoryItem fromInventoryItem = inventoryLists[(int)inventoryLocation][fromItem];
-            InventoryItem toInventoryItem = inventoryLists[(int)inventoryLocation][toItem];
+            InventoryItem fromInventoryItem = InventoryList[(int)inventoryLocation][fromItem];
+            InventoryItem toInventoryItem = InventoryList[(int)inventoryLocation][toItem];
 
-            inventoryLists[(int)inventoryLocation][toItem] = fromInventoryItem;
-            inventoryLists[(int)inventoryLocation][fromItem] = toInventoryItem;
+            InventoryList[(int)inventoryLocation][toItem] = fromInventoryItem;
+            InventoryList[(int)inventoryLocation][fromItem] = toInventoryItem;
 
-            EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryLists[(int)inventoryLocation]);
+            EventHandler.CallInventoryUpdatedEvent(inventoryLocation, InventoryList[(int)inventoryLocation]);
         }
     }
 
@@ -181,7 +188,7 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
 
     public int FindItemInInventory(InventoryLocation inventoryLocation, int itemCode)
     {
-        List<InventoryItem> inventoryList = inventoryLists[(int)inventoryLocation];
+        List<InventoryItem> inventoryList = inventoryList[(int)inventoryLocation];
 
         for (int i = 0; i < inventoryList.Count; i++)
         {
@@ -281,7 +288,7 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
 
         GameObjectSave.sceneData.Remove(Settings.PersistentScene);
 
-        sceneSave.listInvItemArray = inventoryLists;
+        sceneSave.listInvItemArray = InventoryList;
 
         sceneSave.intArrayDictionary = new Dictionary<string, int[]>();
         sceneSave.intArrayDictionary.Add("inventoryListCapacityArray", inventoryListCapacityIntArray);
@@ -302,11 +309,11 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
             {
                 if (sceneSave.listInvItemArray != null)
                 {
-                    inventoryLists = sceneSave.listInvItemArray;
+                    InventoryList = sceneSave.listInvItemArray;
 
                     for (int i = 0; i < (int)InventoryLocation.count; i++)
                     {
-                        EventHandler.CallInventoryUpdatedEvent((InventoryLocation)i, inventoryLists[i]);
+                        EventHandler.CallInventoryUpdatedEvent((InventoryLocation)i, InventoryList[i]);
                     }
 
                     Player.Instance.ClearCarriedItem();
@@ -336,7 +343,7 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
    
     public void RemoveItem(InventoryLocation inventoryLocation, int itemCode)
     {
-        List<InventoryItem> inventoryList = inventoryLists[(int)inventoryLocation];
+        List<InventoryItem> inventoryList = InventoryList[(int)inventoryLocation];
 
         int itemPosition = FindItemInInventory(inventoryLocation, itemCode);
 
@@ -345,7 +352,7 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
             RemoveItemAtPosition(inventoryList, itemCode, itemPosition);
         }
 
-        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryLists[(int)inventoryLocation]);
+        EventHandler.CallInventoryUpdatedEvent(inventoryLocation, InventoryList[(int)inventoryLocation]);
 
     }
 
