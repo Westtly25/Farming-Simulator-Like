@@ -4,14 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Character
+[RequireComponent(typeof(Rigidbody2D))]
+public class Character : MonoBehaviour
 {
+    [Header("Cached Components")]
+    [SerializeField] private Rigidbody2D rgb2D;
 
+
+    [Header("Classes")]
+    [SerializeField] private IMovement movement;
+
+    public virtual void Initialize()
+    {
+        SetComponentsData();
+
+        movement = new Movement();
+    }
+
+    private void SetComponentsData()
+    {
+        rgb2D ??= GetComponent<Rigidbody2D>();
+    }
 }
 
 
+public interface IMovement
+{
+    Vector2 PlayerMovement(float xInput, float yInput);
+}
 
-public class Movement
+public class Movement : IMovement
 {
     [Header("Character Data")]
     [SerializeField] private float movementSpeed;
@@ -25,7 +47,7 @@ public class Movement
     [SerializeField] private bool isRunning;
     [SerializeField] private bool isWalking;
 
-    private Vector2 PlayerMovement(float xInput, float yInput)
+    public Vector2 PlayerMovement(float xInput, float yInput)
     {
         if (yInput != 0 && xInput != 0)
         {
