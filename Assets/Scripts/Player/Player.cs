@@ -4,6 +4,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public class Character
+{
+
+}
+
+
+
+public class Movement
+{
+    [Header("Character Data")]
+    [SerializeField] private float movementSpeed;
+    [SerializeField] private float walkinggSpeed;
+    [SerializeField] private float runningSpeed;
+
+    private const float KOEF = 0.71f;
+
+    [Header("Movement States")]
+    [SerializeField] private bool isIdle;
+    [SerializeField] private bool isRunning;
+    [SerializeField] private bool isWalking;
+
+    private Vector2 PlayerMovement(float xInput, float yInput)
+    {
+        if (yInput != 0 && xInput != 0)
+        {
+            xInput = xInput * KOEF;
+            yInput = yInput * KOEF;
+        }
+
+        return new Vector2(xInput, yInput) * movementSpeed * Time.deltaTime;
+    }
+}
+
+
+
+
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : SingletonMonobehaviour<Player>, ISaveable
 {
     private WaitForSeconds afterLiftToolAnimationPause;
@@ -15,7 +52,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     // Movement Parameters
     private float xInput;
-
     private float yInput;
     private bool isCarrying = false;
     private bool isIdle;
@@ -61,16 +97,26 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private CharacterAttribute toolCharacterAttribute;
 
-    private bool _playerInputIsDisabled = false;
-    public bool PlayerInputIsDisabled { get => _playerInputIsDisabled; set => _playerInputIsDisabled = value; }
+    private bool playerInputIsDisabled = false;
+    public bool PlayerInputIsDisabled
+    {
+        get => playerInputIsDisabled;
+        set => playerInputIsDisabled = value;
+    }
 
-    private string _iSaveableUniqueID;
-    public string ISaveableUniqueID { get { return _iSaveableUniqueID; } set { _iSaveableUniqueID = value; } }
+    private string iSaveableUniqueID;
+    public string ISaveableUniqueID
+    {
+        get => iSaveableUniqueID;
+        set => iSaveableUniqueID = value;
+    }
 
-    private GameObjectSave _gameObjectSave;
-    public GameObjectSave GameObjectSave { get { return _gameObjectSave; } set { _gameObjectSave = value; } }
-
-
+    private GameObjectSave gameObjectSave;
+    public GameObjectSave GameObjectSave
+    {
+        get => gameObjectSave;
+        set => gameObjectSave = value;
+    }
 
     protected override void Awake()
     {
@@ -140,8 +186,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
             PlayerClickInput();
 
-            PlayerTestInput();
-
             // Send event to any listeners for player movement input
             EventHandler.CallMovementEvent(xInput, yInput, isWalking, isRunning, isIdle, isCarrying, toolEffect,
                 isUsingToolRight, isUsingToolLeft, isUsingToolUp, isUsingToolDown,
@@ -161,7 +205,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void PlayerMovement()
     {
-        Vector2 move = new Vector2(xInput * movementSpeed * Time.deltaTime, yInput * movementSpeed * Time.deltaTime);
+        Vector2 move = new Vector2(xInput, yInput) * movementSpeed * Time.deltaTime;
 
         rigidBody2D.MovePosition(rigidBody2D.position + move);
     }
@@ -342,24 +386,15 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private Vector3Int GetPlayerDirection(Vector3 cursorPosition, Vector3 playerPosition)
     {
-        if (
-
-            cursorPosition.x > playerPosition.x
-            &&
-            cursorPosition.y < (playerPosition.y + cursor.ItemUseRadius / 2f)
-            &&
-            cursorPosition.y > (playerPosition.y - cursor.ItemUseRadius / 2f)
-            )
+        if (cursorPosition.x > playerPosition.x &&
+            cursorPosition.y < (playerPosition.y + cursor.ItemUseRadius / 2f) &&
+            cursorPosition.y > (playerPosition.y - cursor.ItemUseRadius / 2f))
         {
             return Vector3Int.right;
         }
-        else if (
-            cursorPosition.x < playerPosition.x
-            &&
-            cursorPosition.y < (playerPosition.y + cursor.ItemUseRadius / 2f)
-            &&
-            cursorPosition.y > (playerPosition.y - cursor.ItemUseRadius / 2f)
-            )
+        else if ( cursorPosition.x < playerPosition.x &&
+            cursorPosition.y < (playerPosition.y + cursor.ItemUseRadius / 2f) &&
+            cursorPosition.y > (playerPosition.y - cursor.ItemUseRadius / 2f))
         {
             return Vector3Int.left;
         }
@@ -406,8 +441,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         }
 
     }
-
-
 
     private void ProcessPlayerClickInputCommodity(ItemDetails itemDetails)
     {
@@ -847,27 +880,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         }
     }
 
-
-    // TODO: Remove
-    /// <summary>
-    /// Temp routine for test input
-    /// </summary>
-    private void PlayerTestInput()
-    {
-        // Trigger Advance Time
-        if (Input.GetKey(KeyCode.T))
-        {
-            TimeManager.Instance.TestAdvanceGameMinute();
-        }
-
-        // Trigger Advance Day
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            TimeManager.Instance.TestAdvanceGameDay();
-        }
-
-    }
-
     private void ResetMovement()
     {
         // Reset movement
@@ -936,7 +948,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     public Vector3 GetPlayerViewportPosition()
     {
-        // Vector3 viewport position for player ((0,0) viewport bottom left, (1,1) viewport top right
         return mainCamera.WorldToViewportPoint(transform.position);
     }
 

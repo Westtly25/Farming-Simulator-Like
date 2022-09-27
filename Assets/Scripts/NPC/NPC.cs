@@ -6,11 +6,19 @@ using UnityEngine;
 [RequireComponent(typeof(GenerateGUID))]
 public class NPC : MonoBehaviour, ISaveable
 {
-    private string _iSaveableUniqueID;
-    public string ISaveableUniqueID { get { return _iSaveableUniqueID; } set { _iSaveableUniqueID = value; } }
+    private string iSaveableUniqueID;
+    public string ISaveableUniqueID
+    {
+        get => iSaveableUniqueID;
+        set => iSaveableUniqueID = value;
+    }
 
-    private GameObjectSave _gameObjectSave;
-    public GameObjectSave GameObjectSave { get { return _gameObjectSave; } set { _gameObjectSave = value; } }
+    private GameObjectSave gameObjectSave;
+    public GameObjectSave GameObjectSave
+    {
+        get => gameObjectSave;
+        set => gameObjectSave = value;
+    }
 
     private NPCMovement npcMovement;
 
