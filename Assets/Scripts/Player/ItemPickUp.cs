@@ -1,25 +1,30 @@
 ﻿using UnityEngine;
+using Zenject;
 
 public class ItemPickUp : MonoBehaviour
 {
+    [Header("Injected Components")]
+    private IInventoryManager inventoryManager;
+
+    [Inject]
+    public void Constructor(IInventoryManager inventoryManager)
+    {
+        this.inventoryManager = inventoryManager;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Item item = collision.GetComponent<Item>();
 
         if (item != null)
         {
-            // Get item details
-            ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(item.ItemCode);
+            ItemDetails itemDetails = inventoryManager.GetItemDetails(item.ItemCode);
 
-            // if item can be picked up
             if (itemDetails.canBePickedUp == true)
             {
-                // Add item to inventory
-                InventoryManager.Instance.AddItem(InventoryLocation.player, item, collision.gameObject);
+                inventoryManager.AddItem(InventoryLocation.player, item, collision.gameObject);
 
-                // Play pick up sound
                 AudioManager.Instance.PlaySound(SoundName.effectPickupSound);
-
             }
         }
     }

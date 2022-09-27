@@ -1,17 +1,26 @@
 ﻿using UnityEngine;
+using Zenject;
 
 public class Item : MonoBehaviour
 {
     [ItemCodeDescription]
     [SerializeField]
-    private int _itemCode;
+    private int itemCode;
+    public int ItemCode
+    {
+        get => itemCode;
+        set => itemCode = value;
+    }
 
     private SpriteRenderer spriteRenderer;
 
-    public int ItemCode
+    [Header("Injected Components")]
+    private IInventoryManager inventoryManager;
+
+    [Inject]
+    public void Constructor(IInventoryManager inventoryManager)
     {
-        get => _itemCode;
-        set => _itemCode = value;
+        this.inventoryManager = inventoryManager;
     }
 
     private void Awake()
@@ -33,11 +42,10 @@ public class Item : MonoBehaviour
         {
             ItemCode = itemCodeParam;
 
-            ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(ItemCode);
+            ItemDetails itemDetails = inventoryManager.GetItemDetails(ItemCode);
 
             spriteRenderer.sprite = itemDetails.itemSprite;
 
-            // If item type is reapable then add nudgeable component
             if (itemDetails.itemType == ItemType.Reapable_scenary)
             {
                 gameObject.AddComponent<ItemNudge>();

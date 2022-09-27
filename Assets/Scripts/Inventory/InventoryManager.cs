@@ -6,6 +6,7 @@ using Zenject;
 public interface IInventoryManager
 {
     List<InventoryItem>[] InventoryList { get; }
+    int[] InventoryListCapacityIntArray { get; }
 
     void AddItem(InventoryLocation inventoryLocation, Item item);
     void AddItem(InventoryLocation inventoryLocation, Item item, GameObject gameObjectToDelete);
@@ -16,6 +17,7 @@ public interface IInventoryManager
     ItemDetails GetItemDetails(int itemCode);
     ItemDetails GetSelectedInventoryItemDetails(InventoryLocation inventoryLocation);
     string GetItemTypeDescription(ItemType itemType);
+    int FindItemInInventory(InventoryLocation inventoryLocation, int itemCode);
 }
 
 public class InventoryManager : IInventoryManager, ISaveable, IInitializable, IDisposable
@@ -31,7 +33,12 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
         private set => inventoryList = value;
     }
 
-    [HideInInspector] public int[] inventoryListCapacityIntArray;
+    [HideInInspector] private int[] inventoryListCapacityIntArray;
+    public int[] InventoryListCapacityIntArray
+    {
+        get => inventoryListCapacityIntArray;
+        private set => inventoryListCapacityIntArray = value;
+    }
 
     [SerializeField] private SO_ItemList itemList = null;
 
@@ -88,9 +95,9 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
             InventoryList[i] = new List<InventoryItem>();
         }
 
-        inventoryListCapacityIntArray = new int[(int)InventoryLocation.count];
+        InventoryListCapacityIntArray = new int[(int)InventoryLocation.count];
 
-        inventoryListCapacityIntArray[(int)InventoryLocation.player] = Settings.playerInitialInventoryCapacity;
+        InventoryListCapacityIntArray[(int)InventoryLocation.player] = Settings.playerInitialInventoryCapacity;
     }
 
     private void CreateItemDetailsDictionary()
@@ -188,7 +195,7 @@ public class InventoryManager : IInventoryManager, ISaveable, IInitializable, ID
 
     public int FindItemInInventory(InventoryLocation inventoryLocation, int itemCode)
     {
-        List<InventoryItem> inventoryList = inventoryList[(int)inventoryLocation];
+        List<InventoryItem> inventoryList = InventoryList[(int)inventoryLocation];
 
         for (int i = 0; i < inventoryList.Count; i++)
         {

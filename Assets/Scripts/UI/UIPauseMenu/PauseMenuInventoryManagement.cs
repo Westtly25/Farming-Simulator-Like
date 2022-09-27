@@ -30,7 +30,7 @@ public class PauseMenuInventoryManagement : MonoBehaviour
         // Populate player inventory
         if (inventoryManager != null)
         {
-            PopulatePlayerInventory(InventoryLocation.player, inventoryManager.inventoryLists[(int)InventoryLocation.player]);
+            PopulatePlayerInventory(InventoryLocation.player, inventoryManager.InventoryList[(int)InventoryLocation.player]);
         }
     }
 
@@ -53,7 +53,7 @@ public class PauseMenuInventoryManagement : MonoBehaviour
     public void DestroyCurrentlyDraggedItems()
     {
         // loop through all player inventory items
-        for (int i = 0; i < inventoryManager.inventoryLists[(int)InventoryLocation.player].Count; i++)
+        for (int i = 0; i < inventoryManager.InventoryList[(int)InventoryLocation.player].Count; i++)
         {
             if (inventoryManagementSlot[i].draggedItem != null)
             {
@@ -70,7 +70,7 @@ public class PauseMenuInventoryManagement : MonoBehaviour
             InitialiseInventoryManagementSlots();
 
             // loop through all player inventory items
-            for (int i = 0; i < inventoryManager.InventoryLists[(int)InventoryLocation.player].Count; i++)
+            for (int i = 0; i < inventoryManager.InventoryList[(int)InventoryLocation.player].Count; i++)
             {
                 // Get inventory item details
                 inventoryManagementSlot[i].itemDetails = inventoryManager.GetItemDetails(playerInventoryList[i].itemCode);
@@ -99,7 +99,7 @@ public class PauseMenuInventoryManagement : MonoBehaviour
         }
 
         // Grey out unavailable slots
-        for (int i = InventoryManager.Instance.inventoryListCapacityIntArray[(int)InventoryLocation.player]; i < Settings.playerMaximumInventoryCapacity; i++)
+        for (int i = inventoryManager.InventoryListCapacityIntArray[(int)InventoryLocation.player]; i < Settings.playerMaximumInventoryCapacity; i++)
         {
             inventoryManagementSlot[i].greyedOutImageGO.SetActive(true);
         }
