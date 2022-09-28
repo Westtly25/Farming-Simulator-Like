@@ -5,62 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Character : MonoBehaviour
-{
-    [Header("Cached Components")]
-    [SerializeField] private Rigidbody2D rgb2D;
-
-
-    [Header("Classes")]
-    [SerializeField] private IMovement movement;
-
-    public virtual void Initialize()
-    {
-        SetComponentsData();
-
-        movement = new Movement();
-    }
-
-    private void SetComponentsData()
-    {
-        rgb2D ??= GetComponent<Rigidbody2D>();
-    }
-}
-
-
-public interface IMovement
-{
-    Vector2 PlayerMovement(float xInput, float yInput);
-}
-
-public class Movement : IMovement
-{
-    [Header("Character Data")]
-    [SerializeField] private readonly float movementSpeed;
-    [SerializeField] private readonly float walkinggSpeed;
-    [SerializeField] private readonly float runningSpeed;
-
-    private const float KOEF = 0.71f;
-
-    [Header("Movement States")]
-    [SerializeField] private bool isIdle;
-    [SerializeField] private bool isRunning;
-    [SerializeField] private bool isWalking;
-
-    public Vector2 PlayerMovement(float xInput, float yInput)
-    {
-        if (yInput != 0 && xInput != 0)
-        {
-            xInput = xInput * KOEF;
-            yInput = yInput * KOEF;
-        }
-
-        return new Vector2(xInput, yInput) * movementSpeed * Time.deltaTime;
-    }
-}
-
-
-[RequireComponent(typeof(Rigidbody2D))]
 public class Player : SingletonMonobehaviour<Player>, ISaveable
 {
     private WaitForSeconds afterLiftToolAnimationPause;
@@ -313,6 +257,8 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         }
     }
 
+
+    #region Player Interactions
     private void PlayerClickInput()
     {
         if (!playerToolUseDisabled)
@@ -533,7 +479,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         playerToolUseDisabled = true;
 
         // Set tool animation to hoe in override animation
-        toolCharacterAttribute.partVariantType = PartVariantType.hoe;
+        toolCharacterAttribute.PartVariantType = PartVariantType.hoe;
         characterAttributeCustomisationList.Clear();
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
         animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
@@ -590,7 +536,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         playerToolUseDisabled = true;
 
         // Set tool animation to watering can in override animation
-        toolCharacterAttribute.partVariantType = PartVariantType.wateringCan;
+        toolCharacterAttribute.PartVariantType = PartVariantType.wateringCan;
         characterAttributeCustomisationList.Clear();
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
         animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
@@ -649,7 +595,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         playerToolUseDisabled = true;
 
         // Set tool animation to axe in override animation
-        toolCharacterAttribute.partVariantType = PartVariantType.axe;
+        toolCharacterAttribute.PartVariantType = PartVariantType.axe;
         characterAttributeCustomisationList.Clear();
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
         animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
@@ -699,7 +645,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         playerToolUseDisabled = true;
 
         // Set tool animation to pickaxe in override animation
-        toolCharacterAttribute.partVariantType = PartVariantType.pickaxe;
+        toolCharacterAttribute.PartVariantType = PartVariantType.pickaxe;
         characterAttributeCustomisationList.Clear();
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
         animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
@@ -715,7 +661,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         playerToolUseDisabled = false;
     }
 
-
     private void ReapInPlayerDirectionAtCursor(ItemDetails itemDetails, Vector3Int playerDirection)
     {
         StartCoroutine(ReapInPlayerDirectionAtCursorRoutine(itemDetails, playerDirection));
@@ -727,7 +672,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         playerToolUseDisabled = true;
 
         // Set tool animation to scythe in override animation
-        toolCharacterAttribute.partVariantType = PartVariantType.scythe;
+        toolCharacterAttribute.PartVariantType = PartVariantType.scythe;
         characterAttributeCustomisationList.Clear();
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
         animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
@@ -877,6 +822,9 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             }
         }
     }
+    #endregion
+
+
 
     private void ResetMovement()
     {
@@ -918,7 +866,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         equippedItemSpriteRenderer.color = new Color(1f, 1f, 1f, 0f);
 
         // Apply base character arms customisation
-        armsCharacterAttribute.partVariantType = PartVariantType.none;
+        armsCharacterAttribute.PartVariantType = PartVariantType.none;
         characterAttributeCustomisationList.Clear();
         characterAttributeCustomisationList.Add(armsCharacterAttribute);
         animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
@@ -935,7 +883,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             equippedItemSpriteRenderer.color = new Color(1f, 1f, 1f, 1f);
 
             // Apply 'carry' character arms customisation
-            armsCharacterAttribute.partVariantType = PartVariantType.carry;
+            armsCharacterAttribute.PartVariantType = PartVariantType.carry;
             characterAttributeCustomisationList.Clear();
             characterAttributeCustomisationList.Add(armsCharacterAttribute);
             animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
@@ -954,16 +902,15 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         return new Vector3(transform.position.x, transform.position.y + Settings.playerCentreYOffset, transform.position.z);
     }
 
+    #region Save Methods
     public void ISaveableRegister()
     {
         SaveLoadManager.Instance.iSaveableObjectList.Add(this);
     }
-
     public void ISaveableDeregister()
     {
         SaveLoadManager.Instance.iSaveableObjectList.Remove(this);
     }
-
     public GameObjectSave ISaveableSave()
     {
         // Delete saveScene for game object if it already exists
@@ -993,8 +940,6 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
         return GameObjectSave;
     }
-
-
     public void ISaveableLoad(GameSave gameSave)
     {
         if (gameSave.gameObjectData.TryGetValue(ISaveableUniqueID, out GameObjectSave gameObjectSave))
@@ -1032,18 +977,14 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             }
         }
     }
-
     public void ISaveableStoreScene(string sceneName)
     {
-        // Nothing required here since the player is on a persistent scene;
     }
-
-
     public void ISaveableRestoreScene(string sceneName)
     {
         // Nothing required here since the player is on a persistent scene;
     }
-
+    #endregion
 
 
     private void SetPlayerDirection(Direction playerDirection)

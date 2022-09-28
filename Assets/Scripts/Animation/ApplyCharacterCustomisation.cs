@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class colorSwap
+public struct colorSwap
 {
     public Color fromColor;
     public Color toColor;

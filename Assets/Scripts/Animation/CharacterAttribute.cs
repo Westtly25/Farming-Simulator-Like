@@ -1,15 +1,14 @@
 ﻿[System.Serializable]
-public struct CharacterAttribute
+public class CharacterAttribute
 {
-
-    public CharacterPartAnimator characterPart;
-    public PartVariantColour partVariantColour;
-    public PartVariantType partVariantType;
+    public CharacterPartAnimator CharacterPart { get; set; }
+    public PartVariantColour PartVariantColour { get; set; }
+    public PartVariantType PartVariantType { get; set; }
 
     public CharacterAttribute(CharacterPartAnimator characterPart, PartVariantColour partVariantColour, PartVariantType partVariantType)
     {
-        this.characterPart = characterPart;
-        this.partVariantColour = partVariantColour;
-        this.partVariantType = partVariantType;
+        CharacterPart = characterPart;
+        PartVariantColour = partVariantColour;
+        PartVariantType = partVariantType;
     }
 }

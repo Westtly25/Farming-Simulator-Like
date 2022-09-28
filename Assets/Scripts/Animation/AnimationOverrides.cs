@@ -42,7 +42,7 @@ public class AnimationOverrides : MonoBehaviour
             Animator currentAnimator = null;
             List<KeyValuePair<AnimationClip, AnimationClip>> animsKeyValuePairList = new List<KeyValuePair<AnimationClip, AnimationClip>>();
 
-            string animatorSOAssetName = characterAttribute.characterPart.ToString();
+            string animatorSOAssetName = characterAttribute.CharacterPart.ToString();
 
             // Find animators in scene that match scriptable object animator type
             Animator[] animatorsArray = character.GetComponentsInChildren<Animator>();
@@ -68,7 +68,7 @@ public class AnimationOverrides : MonoBehaviour
 
                 if (foundAnimation)
                 {
-                    string key = characterAttribute.characterPart.ToString() + characterAttribute.partVariantColour.ToString() + characterAttribute.partVariantType.ToString() + so_AnimationType.animationName.ToString();
+                    string key = characterAttribute.CharacterPart.ToString() + characterAttribute.PartVariantColour.ToString() + characterAttribute.PartVariantType.ToString() + so_AnimationType.animationName.ToString();
 
                     SO_AnimationType swapSO_AnimationType;
                     bool foundSwapAnimation = animationTypeDictionaryByCompositeAttributeKey.TryGetValue(key, out swapSO_AnimationType);

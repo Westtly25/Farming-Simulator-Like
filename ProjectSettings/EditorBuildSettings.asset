@@ -18,5 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene3_Cabin.unity
     guid: a0e498a3b7507fb4c8ad79e685e6a56c
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: ccf852dcb3bed254cad416118fcdeeac,
+      type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 82bcfc30eff6d3d49a7532a33b7042a2,
+      type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 556f4d689986b0d49af7ffa6c46ef5d0,
       type: 2}
