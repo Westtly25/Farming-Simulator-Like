@@ -2355,7 +2355,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7871,8 +7871,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2b99007a9191e4e8c7eb6e5b4e37a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryBar: {fileID: 0}
+  selectedInventoryItem: 
   inventoryListCapacityIntArray: 
   itemList: {fileID: 11400000, guid: 74176a6ff0c07f5458d8c6c8594e96f3, type: 2}
+  iSaveableUniqueID: 
+  gameObjectSave: {}
 --- !u!114 &894496169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7885,7 +7889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c051ed3a916f240bae98257cd72359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryManager: {fileID: 894496168}
 --- !u!1 &946853472
 GameObject:
   m_ObjectHideFlags: 0
@@ -12617,8 +12620,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2b99007a9191e4e8c7eb6e5b4e37a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryBar: {fileID: 0}
+  selectedInventoryItem: 
   inventoryListCapacityIntArray: 
   itemList: {fileID: 11400000, guid: 74176a6ff0c07f5458d8c6c8594e96f3, type: 2}
+  iSaveableUniqueID: 
+  gameObjectSave: {}
 --- !u!4 &1689733837
 Transform:
   m_ObjectHideFlags: 0
