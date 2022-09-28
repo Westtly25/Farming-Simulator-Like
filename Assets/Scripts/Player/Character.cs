@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using Zenject;
 
 [RequireComponent(typeof(Rigidbody2D),
                   typeof(GenerateGUID),
                   typeof(SortingGroup))]
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IInitializable
 {
     [Header("Cached Components")]
     [SerializeField] private Rigidbody2D rgb2D;
@@ -15,7 +16,7 @@ public class Character : MonoBehaviour
     [SerializeField] private IMovement movement;
     [SerializeField] private DefaultInputActions inputActions;
 
-    public virtual void Initialize()
+    public void Initialize()
     {
         SetComponentsData();
 
@@ -25,8 +26,8 @@ public class Character : MonoBehaviour
 
     private void SetComponentsData()
     {
-        rgb2D ??= GetComponent<Rigidbody2D>();
-        generateGUID ??= GetComponent<GenerateGUID>();
+        rgb2D = GetComponent<Rigidbody2D>();
+        generateGUID = GetComponent<GenerateGUID>();
     }
 
     private void Awake()
@@ -56,5 +57,37 @@ public class Character : MonoBehaviour
 
         Vector2 direction = inputActions.Player.Move.ReadValue<Vector2>();
         rgb2D.MovePosition(rgb2D.position + movement.GetDirection(direction));
+    }
+}
+
+
+public interface ICharacterInputController
+{
+    void Initialize();
+    void EnableInputAction();
+    void DisableInputAction();
+}
+
+public class CharacterInputController : ICharacterInputController
+{
+    [SerializeField] private DefaultInputActions inputActions;
+    [SerializeField] private InputAction playerMove;
+
+    public void Initialize()
+    {
+        inputActions = new DefaultInputActions();
+        playerMove = inputActions.Player.Move;
+    }
+
+    public void EnableInputAction()
+    {
+        inputActions.Enable();
+        playerMove.Enable();
+    }
+
+    public void DisableInputAction()
+    {
+        inputActions.Disable();
+        playerMove.Disable();
     }
 }
