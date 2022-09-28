@@ -4,20 +4,21 @@
 public class GenerateGUID : MonoBehaviour
 {
     [SerializeField]
-    private string _gUID = "";
+    private string guid = "";
 
-    public string GUID { get => _gUID; set => _gUID = value; }
+    public string GUID
+    {
+        get => guid;
+        set => guid = value;
+    }
 
     private void Awake()
     {
-        // Only populate in the editor
         if (!Application.IsPlaying(gameObject))
         {
-            // Ensure the object has a guaranteed unique id
-            if (_gUID == "")
+            if (guid == "")
             {
-                //Assign GUID
-                _gUID = System.Guid.NewGuid().ToString();
+                guid = System.Guid.NewGuid().ToString();
             }
         }
     }
